@@ -268,7 +268,65 @@
     if (footer) footer.innerHTML = renderFooter();
     wireFavButtons();
     wireSearch();
+    wireInfoButtons();
   }
+
+  function wireInfoButtons(){
+    if (window.__nexusInfoWired) return;
+    window.__nexusInfoWired = true;
+    // modal container
+    const modal = document.createElement("div");
+    modal.id = "nexusInfoModal";
+    modal.style.cssText = "position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.75);backdrop-filter:blur(6px)";
+    modal.innerHTML = `<div id="nexusInfoBody" style="background:#0d0f19;border:1px solid rgba(255,255,255,.12);border-radius:.9rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)"></div>`;
+    document.body.appendChild(modal);
+    const close = () => { modal.style.display = "none"; };
+    modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-info]");
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const slug = btn.getAttribute("data-info");
+      const g = games.find(x => x.slug === slug);
+      if (!g) return;
+      const price = g.price === "Free" ? "Free to play" : (g.price == null || g.price === 0 ? "TBA" : `$${Number(g.price).toFixed(2)}`);
+      const img = (window.Nexus && Nexus.gameImg) ? '' : '';
+      const rows = [
+        ["Release", g.releaseDate ? new Date(g.releaseDate).toLocaleDateString() : "TBA"],
+        ["Price", price],
+        ["Rating", g.rating > 0 ? `${g.rating.toFixed(1)} / 10` : "Unrated"],
+        ["Developer", g.developer || "—"],
+        ["Publisher", g.publisher || "—"],
+        ["Platforms", (g.platforms||[]).join(", ") || "—"],
+        ["Genres", (g.genres||[]).join(", ") || "—"],
+        ["Status", g.upcoming ? "Upcoming" : (g.newRelease ? "New Release" : "Available")],
+      ];
+      document.getElementById("nexusInfoBody").innerHTML = `
+        <div style="position:relative;height:180px;background:${g.gradient||'#1a1d2e'};border-radius:.9rem .9rem 0 0;overflow:hidden">
+          <img src="${gameImg(g,600,300)}" alt="${g.title}" style="width:100%;height:100%;object-fit:cover;opacity:.85" data-slug="${g.slug}" data-title="${(g.title||'').replace(/"/g,'&quot;')}" data-w="600" data-h="300" data-appid="${g.appid||''}" onerror="NexusImgFallback(this)"/>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(13,15,25,.95))"></div>
+          <button id="nexusInfoClose" aria-label="Close" style="position:absolute;top:.6rem;right:.6rem;width:2rem;height:2rem;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.1rem;cursor:pointer;line-height:1">✕</button>
+          <div style="position:absolute;left:1.2rem;right:1.2rem;bottom:.9rem">
+            <p style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.7);margin:0">${g.developer||''}</p>
+            <h2 style="font-family:Rajdhani,sans-serif;font-size:1.6rem;text-transform:uppercase;margin:.15rem 0 0;line-height:1.1">${g.title}</h2>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.25rem 1.4rem">
+          <p style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.55;margin:0 0 1rem">${g.description||'No description available.'}</p>
+          <div style="display:grid;grid-template-columns:1fr;gap:0">
+            ${rows.map(([k,v])=>`<div style="display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.85rem"><span style="color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.15em;font-size:.7rem">${k}</span><span style="font-weight:600;text-align:right">${v}</span></div>`).join('')}
+          </div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.2rem">
+            <a href="game.html?slug=${g.slug}" class="btn btn-primary" style="flex:1;min-width:8rem;text-align:center">Full page</a>
+            ${g.storeUrl?`<a href="${g.storeUrl}" target="_blank" rel="noopener" class="btn btn-outline" style="flex:1;min-width:8rem;text-align:center">Store</a>`:''}
+          </div>
+        </div>`;
+      modal.style.display = "flex";
+      document.getElementById("nexusInfoClose").addEventListener("click", close);
+    });
 
   function wireFavButtons(){
     document.addEventListener("click", (e) => {
