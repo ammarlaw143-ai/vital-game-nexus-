@@ -217,7 +217,10 @@
         <div class="cover-fade"></div>
         <div class="top-bar">
           <span class="price-badge ${g.price==='Free'?'free':''}">${price}</span>
-          <button class="fav-btn ${fav?'active':''}" data-fav="${g.slug}" aria-label="Favorite">${heart}</button>
+          <div style="display:flex;gap:.35rem">
+            <button class="fav-btn ${fav?'active':''}" data-fav="${g.slug}" aria-label="Favorite">${heart}</button>
+            <button class="fav-btn" data-info="${g.slug}" aria-label="Info" title="Details" style="font-weight:900;font-size:1.1rem;line-height:1">⋯</button>
+          </div>
         </div>
         <div class="meta">
           ${g.rating>0?`<div class="rating">${star}<span>${g.rating.toFixed(1)}</span></div>`:''}
