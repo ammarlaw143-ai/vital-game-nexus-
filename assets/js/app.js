@@ -361,7 +361,7 @@
   // ---------- expose ----------
   window.Nexus = {
     games, news, mods, cmds,
-    mountLayout, gameCardHTML, newsCardHTML,
+    mountLayout, gameCardHTML, newsCardHTML, gameImg, newsImg,
     findGame: s => games.find(g => g.slug === s),
     findArticle: s => news.find(n => n.slug === s),
     qs: (k) => new URLSearchParams(location.search).get(k),
