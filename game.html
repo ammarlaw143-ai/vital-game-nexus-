@@ -34,10 +34,11 @@ if (!g) {
   const price = g.price === "Free" ? "Free to play" : `$${g.price.toFixed(2)}`;
   const fav = window.NexusFavs.has(g.slug);
   root.innerHTML = `
-    <section style="position:relative;overflow:hidden;min-height:60vh">
+    <section style="position:relative;overflow:hidden;min-height:65vh">
       <div style="position:absolute;inset:0;background:${g.gradient};filter:saturate(1.2)"></div>
-      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,25,.3),rgba(13,15,25,.95))"></div>
-      <div style="position:absolute;inset:0" class="grid-bg"></div>
+      <img src="${Nexus.gameImg ? Nexus.gameImg(g,1600,900) : ''}" alt="${g.title}" data-slug="${g.slug}" data-title="${(g.title||'').replace(/"/g,'&quot;')}" data-w="1600" data-h="900" data-appid="${g.appid||''}" onerror="NexusImgFallback(this)" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center"/>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,25,.35) 0%,rgba(13,15,25,.55) 55%,rgba(13,15,25,.95) 100%)"></div>
+      <div style="position:absolute;inset:0;opacity:.35" class="grid-bg"></div>
       <div class="container" style="position:relative;padding:5rem 1rem">
         <a href="games.html" style="font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.7)">← All Games</a>
         <p class="eyebrow" style="margin-top:1.5rem">${g.developer}</p>

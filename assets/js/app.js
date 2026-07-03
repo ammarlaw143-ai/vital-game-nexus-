@@ -219,7 +219,7 @@
           <span class="price-badge ${g.price==='Free'?'free':''}">${price}</span>
           <div style="display:flex;gap:.35rem">
             <button class="fav-btn ${fav?'active':''}" data-fav="${g.slug}" aria-label="Favorite">${heart}</button>
-            <button class="fav-btn" data-info="${g.slug}" aria-label="Info" title="Details" style="font-weight:900;font-size:1.1rem;line-height:1">⋯</button>
+            <button class="fav-btn info-btn" data-info="${g.slug}" aria-label="Details" title="Details" style="font-weight:900;font-size:1.25rem;line-height:.6;padding-bottom:.35rem;color:#fff;background:rgba(0,0,0,.55)">⋮</button>
           </div>
         </div>
         <div class="meta">
@@ -361,7 +361,7 @@
   // ---------- expose ----------
   window.Nexus = {
     games, news, mods, cmds,
-    mountLayout, gameCardHTML, newsCardHTML,
+    mountLayout, gameCardHTML, newsCardHTML, gameImg, newsImg,
     findGame: s => games.find(g => g.slug === s),
     findArticle: s => news.find(n => n.slug === s),
     qs: (k) => new URLSearchParams(location.search).get(k),
