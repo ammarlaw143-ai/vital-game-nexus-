@@ -327,6 +327,7 @@
       modal.style.display = "flex";
       document.getElementById("nexusInfoClose").addEventListener("click", close);
     });
+  }
 
   function wireFavButtons(){
     document.addEventListener("click", (e) => {
