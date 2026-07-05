@@ -101,7 +101,7 @@ function applyFilters(){
     "price-asc": (a,b)=>(a.price==="Free"?0:a.price)-(b.price==="Free"?0:b.price),
     "price-desc": (a,b)=>(b.price==="Free"?0:b.price)-(a.price==="Free"?0:a.price),
   }[state.sort];
-  list.sort(cmp);
+  if (cmp) list.sort(cmp);
   document.getElementById("countLabel").textContent = `${list.length} games`;
   document.getElementById("gamesGrid").innerHTML = list.map(Nexus.gameCardHTML).join('') || `<p style="grid-column:1/-1;color:rgba(255,255,255,.5)">No games match these filters.</p>`;
 }
