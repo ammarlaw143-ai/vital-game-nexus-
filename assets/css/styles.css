@@ -175,6 +175,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 /* form */
 .input,.textarea,.select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:.5rem;padding:.75rem 1rem;font-size:.95rem;outline:none;transition:border-color .15s}
 .input:focus,.textarea:focus,.select:focus{border-color:var(--neon)}
+.select option{background:#0b0f19;color:#fff}
 .textarea{min-height:8rem;resize:vertical}
 .label{font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.6);font-weight:700;display:block;margin-bottom:.5rem}
 
