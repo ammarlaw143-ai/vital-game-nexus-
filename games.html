@@ -46,6 +46,7 @@
     <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:end">
       <div style="flex:1;min-width:14rem"><span class="label">Sort by</span>
         <select class="select" id="sortSel">
+          <option value="all">All</option>
           <option value="popular">Most Popular</option>
           <option value="rating">Highest Rated</option>
           <option value="newest">Newest</option>
@@ -100,7 +101,7 @@ function applyFilters(){
     "price-asc": (a,b)=>(a.price==="Free"?0:a.price)-(b.price==="Free"?0:b.price),
     "price-desc": (a,b)=>(b.price==="Free"?0:b.price)-(a.price==="Free"?0:a.price),
   }[state.sort];
-  list.sort(cmp);
+  if (cmp) list.sort(cmp);
   document.getElementById("countLabel").textContent = `${list.length} games`;
   document.getElementById("gamesGrid").innerHTML = list.map(Nexus.gameCardHTML).join('') || `<p style="grid-column:1/-1;color:rgba(255,255,255,.5)">No games match these filters.</p>`;
 }
