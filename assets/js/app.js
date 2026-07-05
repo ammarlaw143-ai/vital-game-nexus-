@@ -51,7 +51,7 @@
         <div class="brand">
           <div class="logo" style="margin-bottom:1.25rem"><span class="diamond"></span>Nexus<span style="color:var(--neon)">.</span></div>
           <p style="font-size:.875rem;color:rgba(255,255,255,.5);max-width:20rem;line-height:1.65;margin:0 0 1.5rem">Where Every Gamer Belongs. The ultimate destination for news, guides, and the world's biggest gaming database.</p>
-          <div class="socials">${["X","DC","YT","TW","IG"].map(s=>`<div>${s}</div>`).join('')}</div>
+          <div class="socials">${[["X","https://x.com"],["DC","https://discord.com"],["YT","https://youtube.com"],["TW","https://twitch.tv"],["IG","https://instagram.com"]].map(([s,u])=>`<a href="${u}" target="_blank" rel="noopener noreferrer">${s}</a>`).join('')}</div>
         </div>
         ${cols.map(([t,ls])=>`<div><h5>${t}</h5><ul>${ls.map(([l,h])=>`<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`).join('')}
       </div>
