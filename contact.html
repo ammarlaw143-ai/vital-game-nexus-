@@ -24,15 +24,24 @@
     <p class="eyebrow">Get In Touch</p>
     <h1>Contact Us</h1>
     <div class="bar bg-neon"></div>
-    <p>Pitches, tips, partnership requests, or just to say hi — we read everything.</p>
+    <p>Pitches, tips, partnership requests, or just to say hi — we read everything. If something feels off, or you want to leave a review, drop it below — all feedback is welcome.</p>
   </div>
 </section>
 <section class="container" style="padding:3rem 1rem;max-width:42rem">
+  <div class="glass" style="padding:1.5rem;border-radius:.75rem;margin-bottom:1.5rem;display:grid;gap:.75rem">
+    <div><span class="label">Phone / WhatsApp</span>
+      <a href="tel:+923484986124" style="color:var(--neon);text-decoration:none;font-weight:600">+92 348 4986124</a>
+    </div>
+    <div><span class="label">Email</span>
+      <a href="mailto:ammarlaw143@gmail.com" style="color:var(--neon);text-decoration:none;font-weight:600">ammarlaw143@gmail.com</a>
+    </div>
+    <p style="font-size:.85rem;color:rgba(255,255,255,.7);margin:0">Spotted something wrong, or want to share a review? Message us directly or use the form below — every message is read.</p>
+  </div>
   <form class="glass" style="padding:2rem;border-radius:.75rem" onsubmit="event.preventDefault();document.getElementById('thanks').style.display='block';this.reset()">
     <div style="margin-bottom:1rem"><label class="label">Name</label><input class="input" required/></div>
     <div style="margin-bottom:1rem"><label class="label">Email</label><input class="input" type="email" required/></div>
     <div style="margin-bottom:1rem"><label class="label">Subject</label><input class="input" required/></div>
-    <div style="margin-bottom:1.25rem"><label class="label">Message</label><textarea class="textarea" required></textarea></div>
+    <div style="margin-bottom:1.25rem"><label class="label">Message / Review / Feedback</label><textarea class="textarea" required placeholder="Share a review, report an issue, or tell us anything — good or bad."></textarea></div>
     <button class="btn btn-primary" type="submit">Send message</button>
     <p id="thanks" style="display:none;margin-top:1rem;color:var(--neon);font-size:.875rem">Thanks — we'll get back to you soon.</p>
   </form>
