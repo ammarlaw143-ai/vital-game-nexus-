@@ -37,6 +37,12 @@
         <input id="globalSearch" type="search" placeholder="Search games, news…" autocomplete="off"/>
         <div id="searchResults" class="search-results hidden"></div>
       </div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false" onclick="Nexus.toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="mobile-menu" id="mobileMenu">
+        ${navItems.map(([l,h])=>`<a href="${h}" class="${active===h?'active':''}">${l}</a>`).join('')}
+      </nav>
     </div></header>`;
   }
 
