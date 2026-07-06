@@ -26,7 +26,8 @@
   function renderHeader(active){
     const navItems = [
       ["Home","index.html"],["Games","games.html"],["News","news.html"],
-      ["Minecraft","minecraft.html"],["GTA","gta.html"],["Favorites","favorites.html"]
+      ["Minecraft","minecraft.html"],["GTA","gta.html"],["Favorites","favorites.html"],
+      ["Contact","contact.html"],["Privacy","privacy.html"]
     ];
     return `<header class="site-header"><div class="container inner">
       <a href="index.html" class="logo"><span class="diamond"></span>Nexus<span style="color:var(--neon)">.</span></a>
