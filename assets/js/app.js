@@ -373,5 +373,13 @@
     findGame: s => games.find(g => g.slug === s),
     findArticle: s => news.find(n => n.slug === s),
     qs: (k) => new URLSearchParams(location.search).get(k),
+    toggleMenu: () => {
+      const m = document.getElementById("mobileMenu");
+      const b = document.getElementById("hamburgerBtn");
+      if (!m || !b) return;
+      const open = m.classList.toggle("open");
+      b.classList.toggle("open", open);
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+    },
   };
 })();
