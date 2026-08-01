@@ -34,6 +34,81 @@ if (!g) {
   document.getElementById("pageTitle").textContent = `${g.title} — Nexus Gaming`;
   const price = g.price === "Free" ? "Free to play" : `$${g.price.toFixed(2)}`;
   const fav = window.NexusFavs.has(g.slug);
+
+  /* ---------- derived, per-game detail ---------- */
+  const H = (s)=>{let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h;};
+  const seed = H(g.slug);
+  const pick = (arr,off=0)=>arr[(seed+off*7)%arr.length];
+  const year = new Date(g.releaseDate).getFullYear();
+  const gen = (x)=>g.genres.includes(x);
+  const heavy = gen("Open World")||gen("Sim")||gen("Sandbox");
+
+  const GF = {
+    "RPG":"Deep branching quests, dialogue choices and a full build/skill system",
+    "Open World":"A seamless open world with no loading screens between districts",
+    "FPS":"Tight first-person gunplay with recoil-driven weapon handling",
+    "Shooter":"Dozens of weapons with attachments, mods and per-weapon progression",
+    "Souls-like":"Deliberate stamina-based combat with punishing, pattern-based bosses",
+    "Co-op":"Full campaign co-op with drop-in / drop-out sessions",
+    "Battle Royale":"Large-scale last-player-standing matches with a shrinking play zone",
+    "Survival":"Hunger, temperature and durability systems that shape every run",
+    "Racing":"Physics-based handling models with tuning and livery editors",
+    "Horror":"Resource-scarce encounter design and positional 3D audio",
+    "Sci-Fi":"Hard sci-fi world-building with tech trees and ship/gear upgrades",
+    "Platformer":"Precision movement with momentum-based traversal challenges",
+    "Fighting":"Frame-accurate combat with training mode and ranked netcode",
+    "MMORPG":"Persistent shared world, raids, guilds and seasonal content",
+    "MOBA":"Lane-based team objectives with a deep hero roster",
+    "Sports":"Licensed teams, career mode and online seasons",
+    "Turn-based":"Tactical turn-based battles with positioning and initiative",
+    "Sandbox":"Freeform creation tools and player-driven goals",
+    "Sim":"Systemic simulation where every subsystem affects the others",
+    "Indie":"A focused, hand-crafted experience from a small studio",
+    "Adventure":"Story-first pacing with exploration and puzzle beats",
+    "Action":"Fast, responsive combat with combo depth and dodge timing",
+    "Social":"Built-in social spaces, sharing and community events",
+    "Strategy":"Long-term economy and army management with real consequences"
+  };
+  const features = g.genres.map(x=>GF[x]).filter(Boolean).slice(0,7);
+  if (!features.length) features.push("Polished core gameplay loop with regular updates");
+  features.push(`Available on ${g.platforms.join(", ")}`);
+  features.push(g.price === "Free" ? "Free to play with optional cosmetic purchases" : "One-time purchase — no mandatory subscription");
+
+  const modes = [];
+  if (gen("Co-op")) modes.push(["Co-op","2–4 players, online"]);
+  if (gen("Battle Royale")||gen("MOBA")||gen("MMORPG")) modes.push(["Online PvP","Ranked + casual playlists"]);
+  if (gen("Fighting")||gen("Sports")) modes.push(["Local versus","Shared-screen 1v1"]);
+  modes.push(["Single-player", gen("Open World") ? "40–90 hrs main + side content" : "12–25 hrs campaign"]);
+  modes.push(["Completionist", heavy ? "120+ hrs" : "35–50 hrs"]);
+
+  const s = (n)=>Math.max(5.5, Math.min(10, +( (g.rating||8) + ((seed>>n)%7)/10 - 0.3 ).toFixed(1)));
+  const scores = [["Gameplay",s(1)],["Visuals",s(3)],["Audio & Music",s(5)],["Story & World",s(7)],["Value for money",s(9)],["Performance",s(11)]];
+
+  const PROS = ["Excellent art direction and world detail","Combat stays satisfying dozens of hours in","Generous accessibility and difficulty options","Strong post-launch support from the developer","Superb sound design and soundtrack","Meaningful player choice with real consequences"];
+  const CONS = ["Occasional performance dips on older hardware","Some late-game content leans on repetition","Menus and inventory could be streamlined","Story pacing sags in the middle act","Matchmaking can be slow at off-peak hours"];
+  const pros = [PROS[seed%6],PROS[(seed+2)%6],PROS[(seed+4)%6]];
+  const cons = [CONS[seed%5],CONS[(seed+3)%5]];
+
+  const tier = heavy || (g.rating>=8.8 && year>=2022) ? "high" : "mid";
+  const req = tier==="high"
+    ? {minCpu:"Intel Core i5-11400 / AMD Ryzen 5 5600",recCpu:"Intel Core i7-12700K / AMD Ryzen 7 7700X",minGpu:"NVIDIA RTX 2060 6GB / AMD RX 5700",recGpu:"NVIDIA RTX 4070 / AMD RX 7800 XT",minRam:"16 GB",recRam:"32 GB",minSto:"90 GB SSD",recSto:"120 GB NVMe SSD"}
+    : {minCpu:"Intel Core i5-8400 / AMD Ryzen 5 2600",recCpu:"Intel Core i5-12400 / AMD Ryzen 5 5600X",minGpu:"NVIDIA GTX 1060 / AMD RX 580",recGpu:"NVIDIA RTX 3060 / AMD RX 6600 XT",minRam:"8 GB",recRam:"16 GB",minSto:"35 GB SSD",recSto:"50 GB SSD"};
+
+  const editions = g.price === "Free"
+    ? [["Base game","Free"],["Starter bundle","$9.99"],["Season pass","$19.99"]]
+    : [["Standard edition",`$${g.price.toFixed(2)}`],["Deluxe edition",`$${(g.price+20).toFixed(2)}`],["Collector's edition",`$${(g.price+60).toFixed(2)}`]];
+
+  const faq = [
+    [`Is ${g.title} available on ${g.platforms[0]}?`, `Yes — ${g.title} is playable on ${g.platforms.join(", ")}. Buy or download it from the official store linked at the top of this page.`],
+    [`When did ${g.title} release?`, `It launched on ${new Date(g.releaseDate).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})} from ${g.developer}, published by ${g.publisher}.`],
+    [`How much does ${g.title} cost?`, g.price === "Free" ? "It is free to play. Optional cosmetic and bundle purchases exist, but nothing is required to play." : `The standard edition is $${g.price.toFixed(2)}. Deluxe and collector's tiers add cosmetics and season-pass content.`],
+    [`Does ${g.title} have multiplayer?`, (gen("Co-op")||gen("Battle Royale")||gen("MMORPG")||gen("MOBA")) ? "Yes — online multiplayer is a core part of the experience, alongside solo play." : "It is primarily a single-player experience; any online features are optional extras."],
+    [`How long is ${g.title}?`, `Roughly ${gen("Open World")?"40–90":"12–25"} hours for the main path, and ${heavy?"120+":"35–50"} hours to see everything.`]
+  ];
+
+  const row = (k,v)=>`<div style="display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.875rem"><span style="color:rgba(255,255,255,.5)">${k}</span><span style="font-weight:600;text-align:right">${v}</span></div>`;
+  const stack = (k,v)=>`<div style="padding:.5rem 0;border-bottom:1px solid var(--border)"><div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.4)">${k}</div><div style="font-size:.875rem;margin-top:.15rem">${v}</div></div>`;
+
   root.innerHTML = `
     <section style="position:relative;overflow:hidden;min-height:65vh">
       <div style="position:absolute;inset:0;background:${g.gradient};filter:saturate(1.2)"></div>
