@@ -130,31 +130,78 @@ if (!g) {
 
     <section class="container" style="padding:4rem 1rem;display:grid;grid-template-columns:1fr;gap:3rem">
       <div>
-        <h2 style="font-size:1.875rem;text-transform:uppercase;margin:0 0 1rem">About</h2>
+        <h2 style="font-size:1.875rem;text-transform:uppercase;margin:0 0 1rem">About ${g.title}</h2>
         <p style="color:rgba(255,255,255,.8);font-size:1.125rem;line-height:1.7">${g.description}</p>
-        <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Features</h2>
-        <ul style="color:rgba(255,255,255,.7);line-height:1.85;padding-left:1.25rem">
-          <li>Stunning next-gen visuals</li>
-          <li>Massive open world to explore</li>
-          <li>Cross-platform multiplayer support</li>
-          <li>Regular post-launch content updates</li>
+        <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75">${g.title} was developed by <strong style="color:#fff">${g.developer}</strong> and published by <strong style="color:#fff">${g.publisher}</strong>, releasing in ${year} on ${g.platforms.join(", ")}. It sits in the ${g.genres.slice(0,3).join(" / ")} space and currently holds a community score of ${g.rating>0?g.rating.toFixed(1)+" / 10":"no rating yet"}${g.price==="Free"?" and is free to play":` at ${price}`}.</p>
+
+        <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Key Features</h2>
+        <ul style="color:rgba(255,255,255,.75);line-height:1.85;padding-left:1.25rem">
+          ${features.map(f=>`<li>${f}</li>`).join('')}
         </ul>
+
+        <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Game Modes & Length</h2>
+        <div class="glass" style="padding:1.25rem 1.5rem;border-radius:.75rem">
+          ${modes.map(([k,v])=>row(k,v)).join('')}
+        </div>
+
+        <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Review Breakdown</h2>
+        <div class="glass" style="padding:1.5rem;border-radius:.75rem">
+          ${scores.map(([k,v])=>`
+            <div style="margin-bottom:.9rem">
+              <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.35rem"><span style="color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.12em">${k}</span><span style="font-weight:700">${v.toFixed(1)}</span></div>
+              <div style="height:6px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden"><div style="height:100%;width:${v*10}%;background:var(--neon)"></div></div>
+            </div>`).join('')}
+        </div>
+
+        <div class="grid grid-2" style="margin-top:1.5rem">
+          <div class="glass" style="padding:1.25rem;border-radius:.75rem">
+            <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 .6rem;color:var(--neon)">What works</h3>
+            <ul style="color:rgba(255,255,255,.7);font-size:.9rem;line-height:1.7;padding-left:1.1rem;margin:0">${pros.map(p=>`<li>${p}</li>`).join('')}</ul>
+          </div>
+          <div class="glass" style="padding:1.25rem;border-radius:.75rem">
+            <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 .6rem;color:rgba(255,255,255,.6)">What doesn't</h3>
+            <ul style="color:rgba(255,255,255,.7);font-size:.9rem;line-height:1.7;padding-left:1.1rem;margin:0">${cons.map(c=>`<li>${c}</li>`).join('')}</ul>
+          </div>
+        </div>
+
+        <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Editions & Pricing</h2>
+        <div class="glass" style="padding:1.25rem 1.5rem;border-radius:.75rem">
+          ${editions.map(([k,v])=>row(k,v)).join('')}
+          <p style="font-size:.75rem;color:rgba(255,255,255,.45);margin:.9rem 0 0">Prices are indicative — always check the official store for regional pricing and current discounts.</p>
+        </div>
+
+        <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Frequently Asked</h2>
+        ${faq.map(([q,a])=>`<details class="glass" style="padding:1rem 1.25rem;border-radius:.75rem;margin-bottom:.6rem"><summary style="cursor:pointer;font-weight:600">${q}</summary><p style="color:rgba(255,255,255,.7);font-size:.9rem;line-height:1.7;margin:.6rem 0 0">${a}</p></details>`).join('')}
       </div>
+
       <div>
         <div class="glass" style="padding:1.5rem;border-radius:.75rem">
           <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 1rem;color:rgba(255,255,255,.6)">Quick Info</h3>
           ${[
             ["Price",price],["Rating", g.rating>0?`${g.rating.toFixed(1)} / 10`:"Unrated"],
-            ["Release",new Date(g.releaseDate).toLocaleDateString()],["Developer",g.developer],
-            ["Publisher",g.publisher],["Platforms",g.platforms.join(", ")]
-          ].map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.875rem"><span style="color:rgba(255,255,255,.5)">${k}</span><span style="font-weight:600">${v}</span></div>`).join('')}
+            ["Release",new Date(g.releaseDate).toLocaleDateString()],["Release year",year],
+            ["Developer",g.developer],["Publisher",g.publisher],
+            ["Platforms",g.platforms.join(", ")],["Genres",g.genres.slice(0,5).join(", ")],
+            ["Popularity",`${g.popularity} / 100`],
+            ["Multiplayer",(gen("Co-op")||gen("Battle Royale")||gen("MMORPG")||gen("MOBA"))?"Yes":"Single-player focused"],
+            ["Store",g.appid?"Steam":"Official store"]
+          ].map(([k,v])=>row(k,v)).join('')}
         </div>
         <div class="glass" style="padding:1.5rem;border-radius:.75rem;margin-top:1.5rem">
-          <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 1rem;color:rgba(255,255,255,.6)">System Requirements</h3>
-          ${[["CPU","Intel Core i5-10400 / AMD Ryzen 5 3600"],["GPU","NVIDIA RTX 2060 / AMD RX 5700"],["RAM","16 GB"],["Storage","75 GB SSD"]].map(([k,v])=>`<div style="padding:.5rem 0;border-bottom:1px solid var(--border)"><div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.4)">${k}</div><div style="font-size:.875rem;margin-top:.15rem">${v}</div></div>`).join('')}
+          <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 1rem;color:rgba(255,255,255,.6)">Minimum Requirements</h3>
+          ${[["CPU",req.minCpu],["GPU",req.minGpu],["RAM",req.minRam],["Storage",req.minSto],["OS","Windows 10 64-bit"]].map(([k,v])=>stack(k,v)).join('')}
+        </div>
+        <div class="glass" style="padding:1.5rem;border-radius:.75rem;margin-top:1.5rem">
+          <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 1rem;color:var(--neon)">Recommended</h3>
+          ${[["CPU",req.recCpu],["GPU",req.recGpu],["RAM",req.recRam],["Storage",req.recSto],["OS","Windows 11 64-bit"]].map(([k,v])=>stack(k,v)).join('')}
+        </div>
+        <div class="glass" style="padding:1.5rem;border-radius:.75rem;margin-top:1.5rem">
+          <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 1rem;color:rgba(255,255,255,.6)">Tags</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem">${g.genres.map(x=>`<a href="games.html?genre=${encodeURIComponent(x)}" class="badge">${x}</a>`).join('')}</div>
         </div>
       </div>
     </section>
+
 
     <section class="container" style="padding:0 1rem 4rem">
       <h2 style="font-size:1.875rem;text-transform:uppercase;margin:0 0 1.5rem">You may also like</h2>
