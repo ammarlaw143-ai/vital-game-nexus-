@@ -65,6 +65,7 @@
       <div class="bottom">
         <p>© ${new Date().getFullYear()} Nexus Gaming. All rights reserved.</p>
         <p>Not affiliated with any game publisher. Trademarks belong to their respective owners.</p>
+        <p><a href="#" onclick="event.preventDefault();window.NexusConsent&&window.NexusConsent.open()" style="color:rgba(255,255,255,.6)">Cookie settings</a></p>
       </div>
     </div></footer>`;
   }
