@@ -300,3 +300,10 @@ input,textarea,select{font-family:inherit;color:inherit}
   .cookie-inner{padding:1rem;gap:1rem}
   .cookie-actions{width:100%;min-width:0}
 }
+
+/* mobile show-more */
+.sm-hidden{display:none !important}
+.show-more-btn{display:none}
+@media(max-width:640px){
+  .show-more-btn{display:block;width:100%;margin:1rem 0 0;text-align:center}
+}

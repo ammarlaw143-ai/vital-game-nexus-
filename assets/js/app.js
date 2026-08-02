@@ -277,7 +277,44 @@
     wireFavButtons();
     wireSearch();
     wireInfoButtons();
+    wireShowMore();
   }
+
+  // ---------- mobile "show more" for card grids ----------
+  function wireShowMore(){
+    if (window.__nexusShowMoreWired) return;
+    window.__nexusShowMoreWired = true;
+    const LIMIT = 4;
+    const run = () => {
+      if (window.innerWidth > 640) return;
+      document.querySelectorAll(".grid-5, .grid-3, .grid-6").forEach(grid => {
+        if (grid.dataset.showmore === "1") return;
+        const items = Array.from(grid.children).filter(el => !el.classList.contains("show-more-btn"));
+        if (items.length <= LIMIT) return;
+        grid.dataset.showmore = "1";
+        items.forEach((el, i) => { if (i >= LIMIT) el.classList.add("sm-hidden"); });
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn btn-outline show-more-btn";
+        btn.textContent = `Show more (${items.length - LIMIT})`;
+        btn.addEventListener("click", () => {
+          const hidden = items.filter(el => el.classList.contains("sm-hidden"));
+          if (hidden.length) {
+            hidden.forEach(el => el.classList.remove("sm-hidden"));
+            btn.textContent = "Show less";
+          } else {
+            items.forEach((el, i) => { if (i >= LIMIT) el.classList.add("sm-hidden"); });
+            btn.textContent = `Show more (${items.length - LIMIT})`;
+            grid.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+        grid.insertAdjacentElement("afterend", btn);
+      });
+    };
+    if (document.readyState === "complete") setTimeout(run, 0);
+    else window.addEventListener("load", () => setTimeout(run, 0));
+  }
+
 
   function wireInfoButtons(){
     if (window.__nexusInfoWired) return;
