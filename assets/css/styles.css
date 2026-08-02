@@ -255,8 +255,11 @@ input,textarea,select{font-family:inherit;color:inherit}
   .search-wrap{max-width:none}
   .search-wrap input{font-size:.8rem;padding:.5rem .85rem .5rem 2rem}
   .hero{min-height:70vh}
-  .hero-content{padding:4rem 0}
-  .hero p.lead{font-size:1rem}
+  .hero-content{padding:4rem 0;text-align:center;margin-inline:auto}
+  .hero p.lead{font-size:1rem;max-width:none;margin-inline:auto}
+  .hero .eyebrow{justify-content:center}
+  .hero-content .btn-row,.hero-content .row{justify-content:center}
+
   .btn{padding:.7rem 1.1rem;font-size:.7rem;letter-spacing:.15em}
   .page-header{padding:2.5rem 0}
   .page-header p{font-size:1rem}
