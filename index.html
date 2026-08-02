@@ -107,9 +107,10 @@
 <script src="assets/js/app.js"></script>
 <script>
 Nexus.mountLayout("index.html");
-document.getElementById("trending").innerHTML = Nexus.games.filter(g=>g.trending).slice(0,5).map(Nexus.gameCardHTML).join('');
-document.getElementById("topRated").innerHTML = Nexus.games.filter(g=>g.topRated).sort((a,b)=>b.rating-a.rating).slice(0,5).map(Nexus.gameCardHTML).join('');
-document.getElementById("upcoming").innerHTML = Nexus.games.filter(g=>g.upcoming).slice(0,5).map(Nexus.gameCardHTML).join('');
+const fill=(list,n)=>{const out=list.slice(0,n);if(out.length<n){const seen=new Set(out.map(g=>g.slug));for(const g of Nexus.games.slice().sort((a,b)=>b.rating-a.rating)){if(out.length>=n)break;if(!seen.has(g.slug)){out.push(g);seen.add(g.slug);}}}return out;};
+document.getElementById("trending").innerHTML = fill(Nexus.games.filter(g=>g.trending),6).map(Nexus.gameCardHTML).join('');
+document.getElementById("topRated").innerHTML = Nexus.games.filter(g=>g.topRated).sort((a,b)=>b.rating-a.rating).slice(0,6).map(Nexus.gameCardHTML).join('');
+document.getElementById("upcoming").innerHTML = fill(Nexus.games.filter(g=>g.upcoming),6).map(Nexus.gameCardHTML).join('');
 const feat = Nexus.news.find(n=>n.featured);
 if (feat) document.getElementById("featuredNews").innerHTML = Nexus.newsCardHTML(feat,"feature");
 document.getElementById("newsGrid").innerHTML = Nexus.news.filter(n=>!feat||n.slug!==feat.slug).slice(0,6).map(n=>Nexus.newsCardHTML(n)).join('');
