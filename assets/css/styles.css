@@ -67,7 +67,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 .grid-6{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
 @media(min-width:640px){.grid-3,.grid-4,.grid-5,.grid-6{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:768px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}.grid-5{grid-template-columns:repeat(4,1fr)}.grid-6{grid-template-columns:repeat(6,1fr)}}
-@media(min-width:1024px){.grid-5{grid-template-columns:repeat(5,1fr)}}
+@media(min-width:1024px){.grid-5{grid-template-columns:repeat(6,1fr)}}
 
 /* header */
 .site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(13,15,25,.7);border-bottom:1px solid var(--border)}
@@ -264,6 +264,9 @@ input,textarea,select{font-family:inherit;color:inherit}
   .page-header{padding:2.5rem 0}
   .page-header p{font-size:1rem}
   .section-head h2{font-size:1.35rem}
+  .section-head{align-items:center;gap:.75rem}
+  .section-head a.view-all-btn{flex:0 0 auto;white-space:nowrap;padding:.45rem .8rem;border:1px solid color-mix(in oklab,var(--neon) 55%,transparent);border-radius:.5rem;color:var(--neon);font-weight:700}
+
   .news-card .body{padding:1rem}
   .news-card h3{font-size:1rem}
   .news-card.feature h3{font-size:1.5rem}
