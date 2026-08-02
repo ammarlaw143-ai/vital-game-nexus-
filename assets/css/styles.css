@@ -264,6 +264,9 @@ input,textarea,select{font-family:inherit;color:inherit}
   .page-header{padding:2.5rem 0}
   .page-header p{font-size:1rem}
   .section-head h2{font-size:1.35rem}
+  .section-head{align-items:center;gap:.75rem}
+  .section-head a.view-all-btn{flex:0 0 auto;white-space:nowrap;padding:.45rem .8rem;border:1px solid color-mix(in oklab,var(--neon) 55%,transparent);border-radius:.5rem;color:var(--neon);font-weight:700}
+
   .news-card .body{padding:1rem}
   .news-card h3{font-size:1rem}
   .news-card.feature h3{font-size:1.5rem}
