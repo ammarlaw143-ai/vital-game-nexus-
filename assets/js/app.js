@@ -293,27 +293,16 @@
         if (items.length <= LIMIT) return;
         grid.dataset.showmore = "1";
         items.forEach((el, i) => { if (i >= LIMIT) el.classList.add("sm-hidden"); });
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "btn btn-outline show-more-btn";
-        btn.textContent = `Show more (${items.length - LIMIT})`;
-        btn.addEventListener("click", () => {
-          const hidden = items.filter(el => el.classList.contains("sm-hidden"));
-          if (hidden.length) {
-            hidden.forEach(el => el.classList.remove("sm-hidden"));
-            btn.textContent = "Show less";
-          } else {
-            items.forEach((el, i) => { if (i >= LIMIT) el.classList.add("sm-hidden"); });
-            btn.textContent = `Show more (${items.length - LIMIT})`;
-            grid.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
-        grid.insertAdjacentElement("afterend", btn);
+        // surface the section's "View all" link as a compact button on the right
+        const section = grid.closest("section") || grid.parentElement;
+        const link = section && section.querySelector(".section-head a");
+        if (link) link.classList.add("view-all-btn");
       });
     };
     if (document.readyState === "complete") setTimeout(run, 0);
     else window.addEventListener("load", () => setTimeout(run, 0));
   }
+
 
 
   function wireInfoButtons(){
