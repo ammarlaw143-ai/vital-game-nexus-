@@ -337,7 +337,17 @@
         ["Platforms", (g.platforms||[]).join(", ") || "—"],
         ["Genres", (g.genres||[]).join(", ") || "—"],
         ["Status", g.upcoming ? "Upcoming" : (g.newRelease ? "New Release" : "Available")],
+        ["Engine", g.engine || "—"],
+        ["Age rating", g.ageRating || "—"],
+        ["Metacritic", g.metacritic ? `${g.metacritic} / 100` : "—"],
+        ["Main story", g.playtimeMain || "—"],
+        ["Completionist", g.playtimeFull || "—"],
+        ["Players", g.players || "—"],
+        ["Cross-play", g.crossplay || "—"],
+        ["Install size", g.fileSize || "—"],
+        ["Monetisation", g.monetization || "—"],
       ];
+
       document.getElementById("nexusInfoBody").innerHTML = `
         <div style="position:relative;height:180px;background:${g.gradient||'#1a1d2e'};border-radius:.9rem .9rem 0 0;overflow:hidden">
           <img src="${gameImg(g,600,300)}" alt="${g.title}" style="width:100%;height:100%;object-fit:cover;opacity:.85" data-slug="${g.slug}" data-title="${(g.title||'').replace(/"/g,'&quot;')}" data-w="600" data-h="300" data-appid="${g.appid||''}" onerror="NexusImgFallback(this)"/>

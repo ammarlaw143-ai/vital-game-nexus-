@@ -132,12 +132,23 @@ if (!g) {
       <div>
         <h2 style="font-size:1.875rem;text-transform:uppercase;margin:0 0 1rem">About ${g.title}</h2>
         <p style="color:rgba(255,255,255,.8);font-size:1.125rem;line-height:1.7">${g.description}</p>
+        ${(g.longDescription||[]).map(x=>`<p style="color:rgba(255,255,255,.68);font-size:1rem;line-height:1.8">${x}</p>`).join('')}
         <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75">${g.title} was developed by <strong style="color:#fff">${g.developer}</strong> and published by <strong style="color:#fff">${g.publisher}</strong>, releasing in ${year} on ${g.platforms.join(", ")}. It sits in the ${g.genres.slice(0,3).join(" / ")} space and currently holds a community score of ${g.rating>0?g.rating.toFixed(1)+" / 10":"no rating yet"}${g.price==="Free"?" and is free to play":` at ${price}`}.</p>
+
+        ${g.highlights?`<h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Highlights</h2>
+        <div class="glass" style="padding:1.25rem 1.5rem;border-radius:.75rem"><ul style="color:rgba(255,255,255,.78);line-height:1.85;padding-left:1.1rem;margin:0">${g.highlights.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}
+
+        ${g.awards?`<h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Awards & Reception</h2>
+        <div class="glass" style="padding:1.25rem 1.5rem;border-radius:.75rem">${[["Metacritic",`${g.metacritic} / 100`],["User score",`${g.userScore} / 10`],["Recognition",g.awards.join(" · ")]].map(([k,v])=>row(k,v)).join('')}</div>`:''}
+
+        ${g.tips?`<h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Tips for New Players</h2>
+        <div class="glass" style="padding:1.25rem 1.5rem;border-radius:.75rem"><ol style="color:rgba(255,255,255,.78);line-height:1.85;padding-left:1.2rem;margin:0">${g.tips.map(x=>`<li>${x}</li>`).join('')}</ol></div>`:''}
 
         <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Key Features</h2>
         <ul style="color:rgba(255,255,255,.75);line-height:1.85;padding-left:1.25rem">
           ${features.map(f=>`<li>${f}</li>`).join('')}
         </ul>
+
 
         <h2 style="font-size:1.5rem;text-transform:uppercase;margin:2.5rem 0 1rem">Game Modes & Length</h2>
         <div class="glass" style="padding:1.25rem 1.5rem;border-radius:.75rem">
@@ -183,10 +194,27 @@ if (!g) {
             ["Developer",g.developer],["Publisher",g.publisher],
             ["Platforms",g.platforms.join(", ")],["Genres",g.genres.slice(0,5).join(", ")],
             ["Popularity",`${g.popularity} / 100`],
+            ["Franchise",g.franchise||g.title],
+            ["Engine",g.engine||"—"],
+            ["Age rating",g.ageRating||"—"],
+            ["Metacritic",g.metacritic?`${g.metacritic} / 100`:"—"],
+            ["User score",g.userScore?`${g.userScore} / 10`:"—"],
+            ["Main story",g.playtimeMain||"—"],
+            ["Completionist",g.playtimeFull||"—"],
+            ["Players",g.players||"—"],
+            ["Difficulty",g.difficulty||"—"],
+            ["Cross-play",g.crossplay||"—"],
+            ["Controller",g.controllerSupport||"—"],
+            ["Cloud saves",g.cloudSaves||"—"],
+            ["Install size",g.fileSize||"—"],
+            ["Languages",g.languages||"—"],
+            ["Monetisation",g.monetization||"—"],
+            ["DLC / seasons",g.dlc||"—"],
             ["Multiplayer",(gen("Co-op")||gen("Battle Royale")||gen("MMORPG")||gen("MOBA"))?"Yes":"Single-player focused"],
             ["Store",g.appid?"Steam":"Official store"]
           ].map(([k,v])=>row(k,v)).join('')}
         </div>
+
         <div class="glass" style="padding:1.5rem;border-radius:.75rem;margin-top:1.5rem">
           <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;margin:0 0 1rem;color:rgba(255,255,255,.6)">Minimum Requirements</h3>
           ${[["CPU",req.minCpu],["GPU",req.minGpu],["RAM",req.minRam],["Storage",req.minSto],["OS","Windows 10 64-bit"]].map(([k,v])=>stack(k,v)).join('')}
