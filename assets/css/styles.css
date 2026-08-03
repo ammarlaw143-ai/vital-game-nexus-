@@ -59,15 +59,21 @@ input,textarea,select{font-family:inherit;color:inherit}
 .neon-border{box-shadow:0 0 0 1px var(--neon),0 0 24px color-mix(in oklab,var(--neon) 45%,transparent)}
 .grid-bg{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px}
 
-/* grids */
+/* grids — flex wrap so a partially filled last row auto-justifies (no blank columns) */
 .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-.grid-3{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
-.grid-4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-.grid-5{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-.grid-6{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-@media(min-width:640px){.grid-3,.grid-4,.grid-5,.grid-6{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:768px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}.grid-5{grid-template-columns:repeat(3,1fr)}.grid-6{grid-template-columns:repeat(6,1fr)}}
-@media(min-width:1024px){.grid-5{grid-template-columns:repeat(6,1fr)}}
+.grid-3,.grid-4,.grid-5,.grid-6{display:flex;flex-wrap:wrap;justify-content:center;--cols:2;--gap:1rem}
+.grid-3{--gap:1.25rem}
+.grid-3,.grid-4,.grid-5,.grid-6{gap:var(--gap)}
+.grid-3>*,.grid-4>*,.grid-5>*,.grid-6>*{
+  --col-w:calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  flex:1 1 var(--col-w);
+  min-width:0;
+  max-width:calc(var(--col-w) * 1.5);
+}
+@media(min-width:640px){.grid-3,.grid-4,.grid-5,.grid-6{--cols:3}}
+@media(min-width:768px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{--cols:3}.grid-4{--cols:4}.grid-5{--cols:3}.grid-6{--cols:6}}
+@media(min-width:1024px){.grid-5{--cols:6}}
+
 
 /* header */
 .site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(13,15,25,.7);border-bottom:1px solid var(--border)}
