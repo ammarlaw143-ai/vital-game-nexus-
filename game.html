@@ -244,5 +244,32 @@ if (!g) {
   document.head.appendChild(sty);
 }
 </script>
+<script>
+(function(){
+  var g = Nexus.findGame(Nexus.qs("slug"));
+  if (!g) { NexusSEO.setMeta({ title: "Game not found — Nexus Gaming", description: "This game is not in the Nexus Gaming database. Browse 320+ titles instead.", robots: "noindex, follow" }); NexusSEO.base(); return; }
+  var img = Nexus.gameImg(g, 600, 900);
+  var price = (g.price === "Free" || g.price === 0) ? "Free to play" : "$" + Number(g.price).toFixed(2);
+  var desc = (g.title + " (" + (g.releaseDate || "").slice(0,4) + ") — " + (g.genres||[]).slice(0,3).join(", ") + " on " + (g.platforms||[]).join(", ") + ". " + price + ", rated " + g.rating + "/10. " + (g.description || "")).slice(0, 300);
+  NexusSEO.setMeta({
+    title: g.title + " — Release Date, Platforms, Price & Review | Nexus Gaming",
+    description: desc,
+    keywords: [g.title, (g.genres||[])[0], "release date", "system requirements", "review", "price"].filter(Boolean).join(", "),
+    image: img,
+    type: "article",
+    url: "game.html?slug=" + g.slug
+  });
+  NexusSEO.base([
+    NexusSEO.gameSchema(g, img),
+    NexusSEO.breadcrumb([{ name: "Home", path: "" }, { name: "Games", path: "games.html" }, { name: g.title, path: "game.html?slug=" + g.slug }]),
+    NexusSEO.faq([
+      { q: "When was " + g.title + " released?", a: g.title + " released on " + (g.releaseDate || "an unannounced date") + "." },
+      { q: "What platforms is " + g.title + " on?", a: g.title + " is available on " + (g.platforms||[]).join(", ") + "." },
+      { q: "How much does " + g.title + " cost?", a: g.title + " is " + price + "." },
+      { q: "How long is " + g.title + "?", a: "Around " + (g.playtimeMain || "20 hours") + " for the main story and " + (g.playtimeFull || "40+ hours") + " for completionists." }
+    ])
+  ]);
+})();
+</script>
 </body>
 </html>

@@ -54,5 +54,25 @@ if (!a) {
   `;
 }
 </script>
+<script>
+(function(){
+  var a = Nexus.findArticle(Nexus.qs("slug"));
+  if (!a) { NexusSEO.setMeta({ title: "Article not found — Nexus Gaming", description: "This article is not available. Browse the latest gaming news instead.", robots: "noindex, follow" }); NexusSEO.base(); return; }
+  var img = Nexus.newsImg(a, 1200, 630);
+  NexusSEO.setMeta({
+    title: a.title + " | Nexus Gaming",
+    description: a.excerpt,
+    keywords: [a.category, a.tag, "gaming news"].filter(Boolean).join(", "),
+    image: img,
+    type: "article",
+    url: "article.html?slug=" + a.slug,
+    publishedTime: a.date
+  });
+  NexusSEO.base([
+    NexusSEO.newsArticleSchema(a, img),
+    NexusSEO.breadcrumb([{ name: "Home", path: "" }, { name: "News", path: "news.html" }, { name: a.category, path: "news.html?cat=" + encodeURIComponent(a.category) }, { name: a.title, path: "article.html?slug=" + a.slug }])
+  ]);
+})();
+</script>
 </body>
 </html>
