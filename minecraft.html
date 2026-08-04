@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Minecraft Hub — Nexus Gaming</title>
+<title>Minecraft Hub — Commands, Mods, Seeds & Guides | Nexus Gaming</title>
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/seo.js"></script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00DLR4FB24"></script>
 <script>
@@ -192,6 +193,10 @@ document.getElementById("modsTeaser").innerHTML = Nexus.mods.slice(0,6).map(m=>`
   <p style="color:rgba(255,255,255,.6);font-size:.875rem;margin:.5rem 0">${m.description}</p>
   <p style="font-size:.625rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.4)">${m.downloads} downloads • ${m.version}</p>
 </a>`).join('');
+</script>
+<script>
+NexusSEO.setMeta({title:"Minecraft Hub — Commands, Mods, Seeds & Guides | Nexus Gaming", description:"The Minecraft hub: 108+ commands, best mods and shaders, curated seeds, enchanting tables, boss guides and redstone cheat sheets.", keywords:"minecraft commands, minecraft mods, minecraft seeds, minecraft guides, shaders", type:"website"});
+NexusSEO.base([NexusSEO.breadcrumb([{"name":"Home","path":""},{"name":"Minecraft Hub","path":"minecraft.html"}]), NexusSEO.faq([{q:"What is the latest Minecraft version?",a:"Our Latest Versions panel tracks the current Java and Bedrock releases along with headline features from each drop."},{q:"Which Minecraft mods should I install first?",a:"Start with performance and quality-of-life mods, then add content packs. Our mods list groups every pick by category and version."},{q:"Where can I find good Minecraft seeds?",a:"The curated seeds section lists tested seeds with spawn notes for villages, biomes and structures."}])]);
 </script>
 </body>
 </html>

@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>About — Nexus Gaming</title>
+<title>About Nexus Gaming — Our Mission & Editorial Standards</title>
+<meta name="description" content="Who we are, how we test and review games, and the editorial standards behind every Nexus Gaming guide, news post and database entry."/>
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/seo.js"></script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00DLR4FB24"></script>
 <script>
@@ -78,6 +80,10 @@ document.getElementById("values").innerHTML = [
   ["Community Driven","Our roadmap is shaped by the community we serve."]
 ].map(([t,d])=>`<div class="glass" style="padding:1.5rem;border-radius:.75rem"><h3 style="font-size:1.125rem;text-transform:uppercase;margin:0">${t}</h3><p style="color:rgba(255,255,255,.6);font-size:.875rem;margin:.5rem 0 0">${d}</p></div>`).join('');
 document.getElementById("numbers").innerHTML = [["1,200+","Games"],["890","MC Mods"],["45K","Daily Readers"],["24/7","Live Updates"]].map(([n,l])=>`<div class="spec-tile"><div class="num">${n}</div><div class="lab">${l}</div></div>`).join('');
+</script>
+<script>
+NexusSEO.setMeta({title:"About Nexus Gaming — Our Mission & Editorial Standards", description:"Who we are, how we test and review games, and the editorial standards behind every Nexus Gaming guide, news post and database entry.", type:"website"});
+NexusSEO.base([NexusSEO.breadcrumb([{"name":"Home","path":""},{"name":"About Nexus Gaming","path":"about.html"}])]);
 </script>
 </body>
 </html>

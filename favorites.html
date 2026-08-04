@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Favorites — Nexus Gaming</title>
+<title>My Favorite Games — Nexus Gaming</title>
+<meta name="description" content="Your saved games, stored on this device. Build a personal shortlist from the 320+ title Nexus Gaming database."/>
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/seo.js"></script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00DLR4FB24"></script>
 <script>
@@ -45,6 +47,10 @@ function render(){
 }
 render();
 document.addEventListener("click", e=>{ if(e.target.closest("[data-fav]")) setTimeout(render,10); });
+</script>
+<script>
+NexusSEO.setMeta({title:"My Favorite Games — Nexus Gaming", description:"Your saved games, stored on this device. Build a personal shortlist from the 320+ title Nexus Gaming database.", type:"website"});
+NexusSEO.base([NexusSEO.breadcrumb([{"name":"Home","path":""},{"name":"My Favorite Games","path":"favorites.html"}])]);
 </script>
 </body>
 </html>

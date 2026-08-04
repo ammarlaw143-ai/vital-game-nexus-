@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Game Database — Nexus Gaming</title>
+<title>Game Database — 320+ Games by Platform, Genre & Price | Nexus Gaming</title>
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/seo.js"></script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00DLR4FB24"></script>
 <script>
@@ -113,6 +114,10 @@ document.addEventListener("click", (e) => {
 });
 document.getElementById("sortSel").addEventListener("change", e => { state.sort = e.target.value; applyFilters(); });
 document.getElementById("priceSel").addEventListener("change", e => { state.price = e.target.value; applyFilters(); });
+</script>
+<script>
+NexusSEO.setMeta({title:"Game Database — 320+ Games by Platform, Genre & Price | Nexus Gaming", description:"Browse 320+ games with filters for platform, genre, price and rating. Release dates, scores, playtime and free-to-play picks in one database.", keywords:"game database, games list, free to play games, best games by genre, game release dates", type:"website"});
+NexusSEO.base([NexusSEO.breadcrumb([{"name":"Home","path":""},{"name":"Game Database","path":"games.html"}]), NexusSEO.itemList((window.NEXUS_GAMES||[]).slice(0,50).map(g=>({name:g.title,url:'game.html?slug='+g.slug})), 'Nexus Gaming game database'), {"@type":"CollectionPage",name:"Game Database",url:NexusSEO.SITE_URL+"/games.html"}]);
 </script>
 </body>
 </html>

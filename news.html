@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Gaming News — Nexus Gaming</title>
+<title>Gaming News — Daily Leaks, Reviews & Announcements | Nexus Gaming</title>
  <!-- Google tag (gtag.js) -->
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/seo.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00DLR4FB24"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -50,6 +51,10 @@ function render(){
 }
 render();
 document.addEventListener("click", e => { const b = e.target.closest("[data-c]"); if(b){active=b.dataset.c;render();}});
+</script>
+<script>
+NexusSEO.setMeta({title:"Gaming News — Daily Leaks, Reviews & Announcements | Nexus Gaming", description:"Daily gaming news: GTA VI updates, Minecraft releases, hardware analysis, esports results and free game roundups.", keywords:"gaming news, gta 6 news, minecraft news, game reviews, esports", type:"website"});
+NexusSEO.base([NexusSEO.breadcrumb([{"name":"Home","path":""},{"name":"Gaming News","path":"news.html"}]), {"@type":"CollectionPage",name:"Gaming News",url:NexusSEO.SITE_URL+"/news.html"}, NexusSEO.itemList((window.NEXUS_NEWS||[]).slice(0,30).map(n=>({name:n.title,url:'article.html?slug='+n.slug})), 'Latest gaming news')]);
 </script>
 </body>
 </html>
