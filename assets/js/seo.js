@@ -16,7 +16,10 @@
   function currentPath() {
     var file = location.pathname.split("/").pop() || "index.html";
     if (file === "index.html") file = "";
-    return file + (location.search || "");
+    /* Only detail pages are canonical per-slug; filter/search params must not fork canonicals. */
+    var keep = /^(game|article)\.html$/.test(file);
+    var slug = new URLSearchParams(location.search).get("slug");
+    return file + (keep && slug ? "?slug=" + encodeURIComponent(slug) : "");
   }
 
   function upsert(selector, attrs, tag) {
