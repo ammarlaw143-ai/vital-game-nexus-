@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Nexus Gaming — Where Every Gamer Belongs</title>
+<title>Nexus Gaming — Game Database, News, Minecraft & GTA Hubs</title>
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/seo.js"></script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00DLR4FB24"></script>
 <script>
@@ -118,5 +119,9 @@ document.getElementById("stats").innerHTML = [["1,200+","Games Indexed"],["890",
 </script>
 
 
+<script>
+NexusSEO.setMeta({title:"Nexus Gaming — Game Database, News, Minecraft & GTA Hubs", description:"320+ games with release dates and scores, daily gaming news, a full Minecraft command hub and dedicated GTA V and GTA VI coverage.", keywords:"gaming news, game database, video games, minecraft commands, gta 6, free games", type:"website"});
+NexusSEO.base([NexusSEO.breadcrumb([{"name":"Home","path":""}]), NexusSEO.itemList((window.NEXUS_GAMES||[]).slice(0,20).map(g=>({name:g.title,url:'game.html?slug='+g.slug})), 'Featured games on Nexus Gaming')]);
+</script>
 </body>
 </html>

@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>404 — Nexus Gaming</title>
+<title>Page not found — Nexus Gaming</title>
+<meta name="description" content="This page could not be found. Jump back to the Nexus Gaming game database, news feed, Minecraft hub or GTA hub."/>
 <script src="assets/js/consent.js"></script>
+<script src="assets/js/seo.js"></script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00DLR4FB24"></script>
 <script>
@@ -27,5 +29,9 @@
 </section>
 <div id="footer"></div>
 <script src="assets/js/data.js"></script><script src="assets/js/app.js"></script><script>Nexus.mountLayout("");</script>
+<script>
+NexusSEO.setMeta({title:"Page not found — Nexus Gaming", description:"This page could not be found. Jump back to the Nexus Gaming game database, news feed, Minecraft hub or GTA hub.", robots:"noindex, follow", type:"website"});
+NexusSEO.base([NexusSEO.breadcrumb([{"name":"Home","path":""},{"name":"Page not found","path":"404.html"}])]);
+</script>
 </body>
 </html>
