@@ -129,9 +129,28 @@ input,textarea,select{font-family:inherit;color:inherit}
 .hero-content>*:nth-child(3){animation-delay:.24s}
 .hero-content>*:nth-child(4){animation-delay:.36s}
 @keyframes nexus-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+/* ---- section background accents (carry hero motion down the page) ---- */
+.sec-fx{position:relative;isolation:isolate;overflow:hidden}
+.sec-fx>*{position:relative;z-index:1}
+.sec-fx::before{content:"";position:absolute;z-index:0;inset:-20% -10%;pointer-events:none;
+  background-image:linear-gradient(color-mix(in oklab,var(--neon) 10%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in oklab,var(--neon) 10%,transparent) 1px,transparent 1px);
+  background-size:52px 52px;opacity:.3;
+  mask-image:radial-gradient(120% 70% at 50% 40%,#000 0%,transparent 75%);
+  animation:nexus-grid-slide 16s linear infinite}
+.sec-fx::after{content:"";position:absolute;z-index:0;pointer-events:none;width:30rem;height:30rem;border-radius:50%;filter:blur(80px);opacity:.28;
+  left:-8rem;top:-10rem;background:radial-gradient(circle,color-mix(in oklab,var(--neon) 55%,transparent),transparent 70%);
+  animation:nexus-float 22s ease-in-out infinite}
+.sec-fx.fx-alt::after{left:auto;right:-8rem;top:auto;bottom:-10rem;background:radial-gradient(circle,color-mix(in oklab,var(--accent,#a855f7) 50%,transparent),transparent 70%);animation-direction:reverse}
+.sec-fx.fx-scan::before{animation-duration:11s}
+.sec-fx .fx-line{position:absolute;z-index:0;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,color-mix(in oklab,var(--neon) 9%,transparent) 50%,transparent 65%);animation:nexus-sweep 9s ease-in-out infinite}
+/* scroll reveal for cards / feature rows */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,.84,.44,1),transform .7s cubic-bezier(.16,.84,.44,1)}
+.reveal.in-view{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  .hero-slide.is-active,.hero-grid,.hero-sweep,.hero-orb,.hero-content>*{animation:none!important}
+  .hero-slide.is-active,.hero-grid,.hero-sweep,.hero-orb,.hero-content>*,.sec-fx::before,.sec-fx::after,.sec-fx .fx-line{animation:none!important}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
 }
+
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,25,.4) 0%,rgba(13,15,25,.85) 70%,var(--background) 100%)}
 .hero-content{position:relative;padding:6rem 0;max-width:48rem}
 .eyebrow{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.3em;color:var(--neon);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem}
