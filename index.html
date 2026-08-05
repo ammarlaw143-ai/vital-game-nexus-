@@ -47,17 +47,19 @@
   </div>
 </section>
 
-<section class="container" style="padding:4rem 1rem">
+<section class="container sec-fx" style="padding:4rem 1rem">
+  <div class="fx-line"></div>
   <div class="section-head"><h2>Trending Now</h2><a href="games.html?filter=trending">View all →</a></div>
   <div class="grid-5" id="trending"></div>
 </section>
 
-<section class="container" style="padding:2rem 1rem 4rem">
+<section class="container sec-fx fx-alt" style="padding:2rem 1rem 4rem">
   <div class="section-head"><h2>Top Rated</h2><a href="games.html?filter=top-rated">View all →</a></div>
   <div class="grid-5" id="topRated"></div>
 </section>
 
-<section class="container" style="padding:2rem 1rem">
+<section class="container sec-fx fx-scan" style="padding:2rem 1rem">
+  <div class="fx-line"></div>
   <div class="grid grid-2" style="gap:1.5rem">
     <a class="hub-card" style="background-image:linear-gradient(135deg,rgba(0,0,0,.4),rgba(0,0,0,.7)),url('assets/img/hub-minecraft.jpg')" href="minecraft.html">
       <div class="veil"></div>
@@ -78,24 +80,26 @@
   </div>
 </section>
 
-<section class="container" style="padding:4rem 1rem">
+<section class="container sec-fx fx-alt" style="padding:4rem 1rem">
   <div class="section-head"><h2>The Briefing</h2><a href="news.html">All news →</a></div>
   <div id="featuredNews" style="margin-bottom:1.5rem"></div>
   <div class="grid-3" id="newsGrid"></div>
 </section>
 
-<section class="container" style="padding:2rem 1rem">
+<section class="container sec-fx" style="padding:2rem 1rem">
+  <div class="fx-line"></div>
   <div class="section-head"><h2>New & Upcoming</h2><a href="games.html?filter=upcoming">All upcoming →</a></div>
   <div class="grid-5" id="upcoming"></div>
 </section>
 
 
-<section class="container" style="padding:4rem 1rem">
+<section class="container sec-fx fx-alt" style="padding:4rem 1rem">
   <div class="grid grid-4" id="stats"></div>
 </section>
 
   
-<section class="container" style="padding:4rem 1rem">
+<section class="container sec-fx fx-scan" style="padding:4rem 1rem">
+  <div class="fx-line"></div>
   <div class="glass" style="padding:3rem;border-radius:1rem;text-align:center">
     <p class="eyebrow" style="justify-content:center">Newsletter</p>
     <h2 style="font-size:clamp(1.875rem,4vw,2.5rem);text-transform:uppercase;margin:.5rem 0">Get the daily briefing</h2>
@@ -137,6 +141,13 @@ const feat = Nexus.news.find(n=>n.featured);
 if (feat) document.getElementById("featuredNews").innerHTML = Nexus.newsCardHTML(feat,"feature");
 document.getElementById("newsGrid").innerHTML = Nexus.news.filter(n=>!feat||n.slug!==feat.slug).slice(0,6).map(n=>Nexus.newsCardHTML(n)).join('');
 document.getElementById("stats").innerHTML = [["1,200+","Games Indexed"],["890","Minecraft Mods"],["45K","Daily Readers"],["24/7","Live Updates"]].map(([n,l])=>`<div class="spec-tile"><div class="num">${n}</div><div class="lab">${l}</div></div>`).join('');
+(function reveal(){
+  const targets=document.querySelectorAll(".sec-fx .game-card,.sec-fx .news-card,.sec-fx .hub-card,.sec-fx .spec-tile,.sec-fx .glass,.sec-fx .section-head");
+  if(!targets.length) return;
+  if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in-view");io.unobserve(e.target);}})},{threshold:.12});
+  targets.forEach((el,i)=>{el.classList.add("reveal");el.style.transitionDelay=(i%6)*70+"ms";io.observe(el);});
+})();
 </script>
 
 
