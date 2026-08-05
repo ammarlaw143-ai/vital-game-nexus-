@@ -114,6 +114,21 @@
 <script src="assets/js/app.js"></script>
 <script>
 Nexus.mountLayout("index.html");
+(function heroShow(){
+  const box=document.getElementById("heroSlides"); if(!box) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const picks=(Nexus.games||[]).filter(g=>g.topRated||g.trending).sort((a,b)=>b.rating-a.rating).slice(0,8);
+  const urls=picks.map(g=>Nexus.gameImg(g,1600,900)).filter(Boolean);
+  urls.forEach(u=>{const d=document.createElement("div");d.className="hero-slide";d.style.backgroundImage=`url('${u}')`;box.appendChild(d);});
+  const slides=[...box.children]; if(slides.length<2) return;
+  let i=0;
+  setInterval(()=>{
+    slides[i].classList.remove("is-active");
+    i=(i+1)%slides.length;
+    const s=slides[i]; s.style.animation="none"; void s.offsetWidth; s.style.animation="";
+    s.classList.add("is-active");
+  },6000);
+})();
 const fill=(list,n)=>{const out=list.slice(0,n);if(out.length<n){const seen=new Set(out.map(g=>g.slug));for(const g of Nexus.games.slice().sort((a,b)=>b.rating-a.rating)){if(out.length>=n)break;if(!seen.has(g.slug)){out.push(g);seen.add(g.slug);}}}return out;};
 document.getElementById("trending").innerHTML = fill(Nexus.games.filter(g=>g.trending),6).map(Nexus.gameCardHTML).join('');
 document.getElementById("topRated").innerHTML = Nexus.games.filter(g=>g.topRated).sort((a,b)=>b.rating-a.rating).slice(0,6).map(Nexus.gameCardHTML).join('');
