@@ -178,7 +178,7 @@ input,textarea,select{font-family:inherit;color:inherit}
 /* cards */
 .game-card{display:block;position:relative;cursor:pointer;transition:transform .25s}
 .game-card:hover{transform:translateY(-4px)}
-.game-card .cover{position:relative;aspect-ratio:3/4;border-radius:.5rem;overflow:hidden;border:1px solid var(--border);transition:border-color .2s}
+.game-card .cover{position:relative;aspect-ratio:3/4;border-radius:1.25rem;overflow:hidden;border:1px solid var(--border);transition:border-color .2s}
 .game-card:hover .cover{border-color:color-mix(in oklab,var(--neon) 60%,transparent)}
 .game-card .cover-grad{position:absolute;inset:0}
 .game-card .cover-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.2) 50%,transparent)}
