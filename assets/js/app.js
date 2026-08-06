@@ -280,6 +280,8 @@
     wireSearch();
     wireInfoButtons();
     wireShowMore();
+    if (window.NexusAuth) window.NexusAuth.mount();
+
   }
 
   // ---------- mobile "show more" for card grids ----------
