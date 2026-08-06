@@ -365,3 +365,42 @@ input,textarea,select{font-family:inherit;color:inherit}
 @media(max-width:640px){
   .show-more-btn{display:block;width:100%;margin:1rem 0 0;text-align:center}
 }
+
+/* ---------- account / auth ---------- */
+.auth-slot{display:flex;align-items:center;margin-left:.75rem}
+.auth-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .95rem;border-radius:999px;font:600 .8rem/1 var(--font-head),sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;color:#04131a;background:var(--neon);border:1px solid transparent;transition:.25s}
+.auth-chip:hover{box-shadow:0 0 22px color-mix(in oklch,var(--neon) 55%,transparent);transform:translateY(-1px)}
+.auth-chip.is-user{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);color:#fff}
+.auth-chip.is-user:hover{border-color:var(--neon)}
+.auth-chip-wrap{position:relative}
+.auth-avatar{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:999px;background:var(--neon);color:#04131a;font-size:.75rem}
+.auth-chip.is-guest .auth-avatar{background:var(--neon-2,#a855f7);color:#fff}
+.auth-name{max-width:8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.auth-panel{position:absolute;right:0;top:calc(100% + .6rem);min-width:15rem;padding:1rem;border-radius:1rem;background:rgba(10,14,20,.95);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,.55);display:none;z-index:80}
+.auth-panel.open{display:block}
+.auth-panel-title{margin:0;font:600 .95rem/1.2 var(--font-head),sans-serif;color:#fff}
+.auth-panel-sub{margin:.3rem 0 .8rem;font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.5}
+.auth-panel-item{display:block;width:100%;text-align:left;padding:.55rem .6rem;border-radius:.6rem;background:none;border:0;color:rgba(255,255,255,.85);font-size:.85rem;cursor:pointer;text-decoration:none}
+.auth-panel-item:hover{background:rgba(255,255,255,.07);color:var(--neon)}
+.auth-panel-item.danger:hover{color:#ff6b6b}
+.auth-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:1.25rem;background:rgba(3,6,10,.78);backdrop-filter:blur(8px);overflow:auto}
+.auth-modal.open{display:flex}
+.auth-modal-card{position:relative;width:100%;max-width:26rem;padding:2rem;border-radius:1.25rem;background:rgba(12,16,24,.96);border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.auth-close{position:absolute;top:.75rem;right:.9rem;background:none;border:0;color:rgba(255,255,255,.5);font-size:1.6rem;line-height:1;cursor:pointer}
+.auth-close:hover{color:#fff}
+.auth-kicker{margin:0;font:600 .7rem/1 var(--font-head),sans-serif;letter-spacing:.25em;text-transform:uppercase;color:var(--neon)}
+.auth-modal-card h3{margin:.6rem 0 .4rem;font:700 1.5rem/1.2 var(--font-head),sans-serif;color:#fff}
+.auth-lead{margin:0 0 1.25rem;font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6}
+.auth-form{display:grid;gap:.85rem}
+.auth-form label{display:grid;gap:.35rem;font:600 .7rem/1 var(--font-head),sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.auth-form input{padding:.75rem .9rem;border-radius:.7rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#fff;font:400 .9rem/1.2 inherit;letter-spacing:normal;text-transform:none}
+.auth-form input:focus{outline:none;border-color:var(--neon);box-shadow:0 0 0 3px color-mix(in oklch,var(--neon) 22%,transparent)}
+.auth-error{margin:0;font-size:.8rem;color:#ff7b7b}
+.auth-submit{margin-top:.4rem;width:100%;justify-content:center}
+.auth-sep{display:flex;align-items:center;gap:.75rem;margin:1.1rem 0;color:rgba(255,255,255,.35);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+.auth-sep::before,.auth-sep::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
+.auth-guest{width:100%;justify-content:center}
+.auth-switch{margin:1.1rem 0 0;text-align:center;font-size:.8rem;color:rgba(255,255,255,.55)}
+.auth-switch button{background:none;border:0;color:var(--neon);cursor:pointer;font:inherit}
+.auth-note{margin:.9rem 0 0;text-align:center;font-size:.7rem;color:rgba(255,255,255,.35);line-height:1.5}
+@media (max-width:1100px){.auth-slot{order:3;margin-left:auto;margin-right:.5rem}.auth-name{display:none}}
