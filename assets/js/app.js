@@ -37,6 +37,8 @@
         <input id="globalSearch" type="search" placeholder="Search games, news…" autocomplete="off"/>
         <div id="searchResults" class="search-results hidden"></div>
       </div>
+      <div id="authSlot" class="auth-slot"></div>
+
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false" onclick="Nexus.toggleMenu()">
         <span></span><span></span><span></span>
       </button>
